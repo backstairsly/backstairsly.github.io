@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio — artist & maker">
+<title>Studio — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Newsreader:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --ink: #1a1813;
+    --muted: #8a8478;
+    --accent: #c2410c;
+    --col-width: 220px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Newsreader', Georgia, serif;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── DESKTOP NAV ─────────────────────────────── */
+  .nav-desktop {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--col-width);
+    height: 100vh;
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    background: var(--bg);
+    border-right: 1px solid rgba(26,24,19,0.08);
+  }
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .brand-sub {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 56px;
+  }
+  .nav-list { display: flex; flex-direction: column; gap: 2px; }
+  .nav-list a {
+    font-size: 16px;
+    padding: 5px 0;
+    color: var(--ink);
+    position: relative;
+    width: fit-content;
+    transition: color 0.25s ease;
+  }
+  .nav-list a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 3px;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .nav-list a:hover { color: var(--accent); }
+  .nav-list a:hover::after { width: 100%; }
+  .nav-footer {
+    margin-top: auto;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── MOBILE NAV ──────────────────────────────── */
+  .nav-mobile { display: none; }
+  .mobile-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(26,24,19,0.08);
+    z-index: 60;
+  }
+  .mobile-bar .brand { font-size: 20px; margin: 0; }
+  .hamburger {
+    width: 28px; height: 20px;
+    position: relative;
+    background: none; border: none;
+    cursor: pointer;
+  }
+  .hamburger span {
+    position: absolute;
+    left: 0; width: 100%; height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.35s ease, opacity 0.25s ease;
+  }
+  .hamburger span:nth-child(1) { top: 2px; }
+  .hamburger span:nth-child(2) { top: 9px; }
+  .hamburger span:nth-child(3) { top: 16px; }
+  .nav-open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-open .hamburger span:nth-child(2) { opacity: 0; }
+  .nav-open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    position: fixed;
+    inset: 60px 0 0 0;
+    background: var(--bg);
+    z-index: 55;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1), opacity 0.3s ease;
+  }
+  .nav-open .mobile-menu { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .mobile-menu a {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(26,24,19,0.08);
+  }
+
+  /* ── SCROLLER ────────────────────────────────── */
+  .main { margin-left: var(--col-width); min-height: 100vh; }
+
+  .scroller {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  /* ── COLLAGE TRACK (desktop) ─────────────────── */
+  /* height set by JS; images are absolutely positioned */
+  .track {
+    position: relative;
+    animation: scrollUp 20s linear infinite;
+    will-change: transform;
+  }
+  .scroller:hover .track { animation-play-state: paused; }
+
+  @keyframes scrollUp {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-50%); }
+  }
+
+  .project {
+    position: absolute;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .project img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0.12) contrast(1.02);
+    transition: transform 0.6s cubic-bezier(.2,.8,.2,1), filter 0.5s ease;
+  }
+  .project:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0) contrast(1.06);
+  }
+  .project-label {
+    position: absolute;
+    left: 0; bottom: 0;
+    padding: 14px 18px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .project:hover .project-label { opacity: 1; transform: translateY(0); }
+  .project-title { font-family: 'Fraunces', serif; font-size: 20px; }
+  .project-meta  { font-size: 12px; font-style: italic; opacity: 0.85; }
+
+  /* ── MOBILE: reflow to stacked alternating list ─ */
+  @media (max-width: 820px) {
+    .nav-desktop { display: none; }
+    .nav-mobile  { display: block; }
+    .main { margin-left: 0; padding-top: 60px; }
+    .scroller { height: calc(100vh - 60px); }
+
+    .track {
+      position: relative !important;
+      height: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      padding: 16px 12px !important;
+    }
+    .project {
+      position: relative !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 80% !important;
+      height: 220px !important;
+    }
+    .project:nth-child(even) { margin-left: auto !important; }
+    .project-label { opacity: 1 !important; transform: none !important; }
+    .project:hover img { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- DESKTOP NAV -->
+<nav class="nav-desktop">
+  <div class="brand">Your Name</div>
+  <div class="brand-sub">artist & maker</div>
+  <div class="nav-list">
+    <a href="#">Work</a>
+    <a href="#">About</a>
+    <a href="#">Exhibitions</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="nav-footer">
+    © 2026 · Based in Cincinnati<br>
+    Instagram · Email
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile" id="mobileNav">
+  <div class="mobile-bar">
+    <div class="brand">Your Name</div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu">
+    <a href="#">Work</a>
+    <a href="#">About</a>
+    <a href="#">Exhibitions</a>
+    <a href="#">Contact</a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="scroller">
+    <div class="track" id="track"></div>
+  </div>
+</main>
+
+<script>
+  /*
+   * SECTION_H: the pixel height of one complete image set.
+   * The track is 2× this tall; the animation moves exactly -50% (= -SECTION_H px).
+   * Adjust this if you add more images and need more vertical space.
+   */
+  const SECTION_H = 2100;
+
+  /*
+   * Each project has a `pos` object describing its desktop collage position:
+   *   top    – px from the top of the track section
+   *   left   – % from the left of the content area
+   *   width  – % of the content area
+   *   height – px (image is cropped to this via object-fit: cover)
+   *
+   * Composition rationale:
+   *   [1]+[2]  – large portrait anchors left, small landscape floats right → dynamic opening pair
+   *   [3]      – tall portrait continues the right column below [2]
+   *   [4]      – landscape re-anchors the left after [1] clears
+   *   [5]      – wide bridge piece spans center, creates visual breath
+   *   [6]+[7]  – two portraits side-by-side close the loop with symmetry
+   */
+  const projects = [
+    {
+      title: 'Tidal Forms',    meta: 'oil on canvas, 2025',  url: '#project-1',
+      img: 'https://picsum.photos/seed/tide/700/870',
+      pos: { top: 50,   left: '4%',  width: '49%', height: 580 },
+    },
+    {
+      title: 'Quiet Geometry', meta: 'mixed media, 2024',    url: '#project-2',
+      img: 'https://picsum.photos/seed/geom/700/445',
+      pos: { top: 50,   left: '56%', width: '37%', height: 255 },
+    },
+    {
+      title: 'Field Notes',    meta: 'risograph, 2025',      url: '#project-3',
+      img: 'https://picsum.photos/seed/field/600/800',
+      pos: { top: 345,  left: '55%', width: '35%', height: 460 },
+    },
+    {
+      title: 'Afterimage',     meta: 'photography, 2024',    url: '#project-4',
+      img: 'https://picsum.photos/seed/after/800/480',
+      pos: { top: 670,  left: '7%',  width: '45%', height: 300 },
+    },
+    {
+      title: 'Soft Machine',   meta: 'sculpture, 2025',      url: '#project-5',
+      img: 'https://picsum.photos/seed/mach/900/510',
+      pos: { top: 1020, left: '31%', width: '56%', height: 370 },
+    },
+    {
+      title: 'Margin Notes',   meta: 'ink on paper, 2025',   url: '#project-6',
+      img: 'https://picsum.photos/seed/margn/600/800',
+      pos: { top: 1440, left: '4%',  width: '38%', height: 510 },
+    },
+    {
+      title: 'Echo Chamber',   meta: 'installation, 2024',   url: '#project-7',
+      img: 'https://picsum.photos/seed/echoc/700/900',
+      pos: { top: 1440, left: '45%', width: '44%', height: 510 },
+    },
+  ];
+
+  const track = document.getElementById('track');
+  track.style.height = (SECTION_H * 2) + 'px';
+
+  function makeItem(p, offset, lazy) {
+    const { top, left, width, height } = p.pos;
+    const el = document.createElement('a');
+    el.className = 'project';
+    el.href = p.url;
+    el.style.cssText = `top:${top + offset}px;left:${left};width:${width};height:${height}px;`;
+    el.innerHTML =
+      `<img src="${p.img}" alt="${p.title}"${lazy ? ' loading="lazy"' : ''}>` +
+      `<div class="project-label">` +
+        `<span class="project-title">${p.title}</span>` +
+        `<span class="project-meta">${p.meta}</span>` +
+      `</div>`;
+    return el;
+  }
+
+  // first set: eager-load (visible on initial paint)
+  projects.forEach(p => track.appendChild(makeItem(p, 0, false)));
+  // duplicate set: lazy-load (only needed mid-loop)
+  projects.forEach(p => track.appendChild(makeItem(p, SECTION_H, true)));
+
+  // mobile hamburger
+  const navEl = document.getElementById('mobileNav');
+  document.getElementById('hamburger').addEventListener('click', () =>
+    navEl.classList.toggle('nav-open')
+  );
+</script>
+</body>
+</html>
