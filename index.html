@@ -270,57 +270,33 @@
    * The track is 2× this tall; the animation moves exactly -50% (= -SECTION_H px).
    * Adjust this if you add more images and need more vertical space.
    */
-  const SECTION_H = 2100;
+  const SECTION_H = 1700;
 
-  /*
-   * Each project has a `pos` object describing its desktop collage position:
-   *   top    – px from the top of the track section
-   *   left   – % from the left of the content area
-   *   width  – % of the content area
-   *   height – px (image is cropped to this via object-fit: cover)
-   *
-   * Composition rationale:
-   *   [1]+[2]  – large portrait anchors left, small landscape floats right → dynamic opening pair
-   *   [3]      – tall portrait continues the right column below [2]
-   *   [4]      – landscape re-anchors the left after [1] clears
-   *   [5]      – wide bridge piece spans center, creates visual breath
-   *   [6]+[7]  – two portraits side-by-side close the loop with symmetry
-   */
   const projects = [
     {
-      title: 'Tidal Forms',    meta: 'oil on canvas, 2025',  url: '#project-1',
-      img: 'https://picsum.photos/seed/tide/700/870',
+      title: 'Doubt',               meta: 'medium, year', url: '#project-1',
+      img: 'images/Doubt01.jpg',
       pos: { top: 50,   left: '4%',  width: '49%', height: 580 },
     },
     {
-      title: 'Quiet Geometry', meta: 'mixed media, 2024',    url: '#project-2',
-      img: 'https://picsum.photos/seed/geom/700/445',
+      title: 'Monad Device v.1',    meta: 'medium, year', url: '#project-2',
+      img: 'images/Monad_Device_v.1_01j.jpg',
       pos: { top: 50,   left: '56%', width: '37%', height: 255 },
     },
     {
-      title: 'Field Notes',    meta: 'risograph, 2025',      url: '#project-3',
-      img: 'https://picsum.photos/seed/field/600/800',
+      title: 'Network Triptych',    meta: 'medium, year', url: '#project-3',
+      img: 'images/Network_Triptych03_Detail.jpg',
       pos: { top: 345,  left: '55%', width: '35%', height: 460 },
     },
     {
-      title: 'Afterimage',     meta: 'photography, 2024',    url: '#project-4',
-      img: 'https://picsum.photos/seed/after/800/480',
+      title: 'Socrates Organism',   meta: 'medium, year', url: '#project-4',
+      img: 'images/Socrates_Organism02.jpg',
       pos: { top: 670,  left: '7%',  width: '45%', height: 300 },
     },
     {
-      title: 'Soft Machine',   meta: 'sculpture, 2025',      url: '#project-5',
-      img: 'https://picsum.photos/seed/mach/900/510',
-      pos: { top: 1020, left: '31%', width: '56%', height: 370 },
-    },
-    {
-      title: 'Margin Notes',   meta: 'ink on paper, 2025',   url: '#project-6',
-      img: 'https://picsum.photos/seed/margn/600/800',
-      pos: { top: 1440, left: '4%',  width: '38%', height: 510 },
-    },
-    {
-      title: 'Echo Chamber',   meta: 'installation, 2024',   url: '#project-7',
-      img: 'https://picsum.photos/seed/echoc/700/900',
-      pos: { top: 1440, left: '45%', width: '44%', height: 510 },
+      title: 'Stealth Phrenology',  meta: 'medium, year', url: '#project-5',
+      img: 'images/Stealth_Phrenology01.jpg',
+      pos: { top: 1020, left: '28%', width: '50%', height: 400 },
     },
   ];
 
