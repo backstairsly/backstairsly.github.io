@@ -186,30 +186,14 @@
   .project-title { font-family: 'IBM Plex Mono', monospace; font-size: 20px; }
   .project-meta  { font-size: 12px; font-style: italic; opacity: 0.85; }
 
-  /* ── MOBILE: reflow to stacked alternating list ─ */
+  /* ── MOBILE ─────────────────────────────────────────────────────────────── */
+  /* Collage layout (absolute positioning + overlap) is handled entirely by JS,
+   * scaled to the mobile container width — no overrides needed here.         */
   @media (max-width: 820px) {
     .nav-desktop { display: none; }
     .nav-mobile  { display: block; }
     .main { margin-left: 0; padding-top: 60px; }
     .scroller { height: calc(100vh - 60px); }
-
-    .track {
-      position: relative !important;
-      height: auto !important;
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 12px !important;
-      padding: 16px 12px !important;
-    }
-    .project {
-      position: relative !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 80% !important;
-      height: 220px !important;
-    }
-    .project:nth-child(even) { margin-left: auto !important; }
-    .project img { height: 100% !important; object-fit: cover !important; }
     .project-label { opacity: 1 !important; transform: none !important; }
     .project:hover img { transform: none !important; }
   }
@@ -284,10 +268,11 @@
 
   const PASSES         = 6;    // shuffled cycles → 36 items before any repeat
   const STEP           = 0.70; // step when overlapping: image starts 30% into the previous one
-  const BREATHE_CHANCE = 0.1; // probability (0–1) an image gets space instead of overlap
+  const BREATHE_CHANCE = 0.2; // probability (0–1) an image gets space instead of overlap
   const BREATHE_STEP   = 1; // step when breathing: image starts 20% below the previous bottom
   const PADDING        = 50;   // px breathing room before/after the set
-  const SCROLL_SPEED   = 200;  // px/s — keeps visual pace consistent regardless of content size
+  const SCROLL_SPEED        = 200; // px/s desktop
+  const MOBILE_SCROLL_SPEED = 80;  // px/s mobile — slower to compensate for smaller images
 
   /* ── Fisher-Yates shuffle ───────────────────────────────────────────────── */
   function shuffle(arr) {
@@ -345,8 +330,9 @@
     const last      = sequence.length - 1;
     const SECTION_H = tops[last] + pxH[last] + PADDING;
 
+    const speed = window.innerWidth <= 820 ? MOBILE_SCROLL_SPEED : SCROLL_SPEED;
     track.style.height            = (SECTION_H * 2) + 'px';
-    track.style.animationDuration = Math.round(SECTION_H / SCROLL_SPEED) + 's';
+    track.style.animationDuration = Math.round(SECTION_H / speed) + 's';
 
     function makeItem(p, i, offset, lazy) {
       const el = document.createElement('a');
