@@ -7,12 +7,12 @@
 <title>Studio — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Newsreader:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f4f1ea;
-    --ink: #1a1813;
-    --muted: #8a8478;
+    --bg: #e8eaed;
+    --ink: #1c1f24;
+    --muted: #7a7e87;
     --accent: #c2410c;
     --col-width: 220px;
   }
@@ -22,7 +22,7 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: 'IBM Plex Mono', monospace;
     overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
@@ -41,17 +41,11 @@
     border-right: 1px solid rgba(26,24,19,0.08);
   }
   .brand {
-    font-family: 'Fraunces', serif;
+    font-family: 'IBM Plex Mono', monospace;
     font-weight: 400;
     font-size: 28px;
     line-height: 1.05;
     letter-spacing: -0.01em;
-    margin-bottom: 4px;
-  }
-  .brand-sub {
-    font-size: 13px;
-    color: var(--muted);
-    font-style: italic;
     margin-bottom: 56px;
   }
   .nav-list { display: flex; flex-direction: column; gap: 2px; }
@@ -129,7 +123,7 @@
   }
   .nav-open .mobile-menu { transform: translateY(0); opacity: 1; pointer-events: auto; }
   .mobile-menu a {
-    font-family: 'Fraunces', serif;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 32px;
     padding: 10px 0;
     border-bottom: 1px solid rgba(26,24,19,0.08);
@@ -142,18 +136,15 @@
     height: 100vh;
     overflow: hidden;
     position: relative;
-    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
-            mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
   }
 
   /* ── COLLAGE TRACK (desktop) ─────────────────── */
   /* height set by JS; images are absolutely positioned */
   .track {
     position: relative;
-    animation: scrollUp 20s linear infinite;
+    animation: scrollUp 25s linear infinite;
     will-change: transform;
   }
-  .scroller:hover .track { animation-play-state: paused; }
 
   @keyframes scrollUp {
     from { transform: translateY(0); }
@@ -164,11 +155,11 @@
     position: absolute;
     overflow: hidden;
     cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.13);
   }
   .project img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
     filter: grayscale(0.12) contrast(1.02);
     transition: transform 0.6s cubic-bezier(.2,.8,.2,1), filter 0.5s ease;
@@ -192,7 +183,7 @@
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
   .project:hover .project-label { opacity: 1; transform: translateY(0); }
-  .project-title { font-family: 'Fraunces', serif; font-size: 20px; }
+  .project-title { font-family: 'IBM Plex Mono', monospace; font-size: 20px; }
   .project-meta  { font-size: 12px; font-style: italic; opacity: 0.85; }
 
   /* ── MOBILE: reflow to stacked alternating list ─ */
@@ -218,6 +209,7 @@
       height: 220px !important;
     }
     .project:nth-child(even) { margin-left: auto !important; }
+    .project img { height: 100% !important; object-fit: cover !important; }
     .project-label { opacity: 1 !important; transform: none !important; }
     .project:hover img { transform: none !important; }
   }
@@ -227,12 +219,10 @@
 
 <!-- DESKTOP NAV -->
 <nav class="nav-desktop">
-  <div class="brand">Your Name</div>
-  <div class="brand-sub">artist & maker</div>
+  <div class="brand">Lucy Weaver</div>
   <div class="nav-list">
     <a href="#">Work</a>
     <a href="#">About</a>
-    <a href="#">Exhibitions</a>
     <a href="#">Contact</a>
   </div>
   <div class="nav-footer">
@@ -244,7 +234,7 @@
 <!-- MOBILE NAV -->
 <div class="nav-mobile" id="mobileNav">
   <div class="mobile-bar">
-    <div class="brand">Your Name</div>
+    <div class="brand">Lucy Weaver</div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -252,7 +242,6 @@
   <div class="mobile-menu">
     <a href="#">Work</a>
     <a href="#">About</a>
-    <a href="#">Exhibitions</a>
     <a href="#">Contact</a>
   </div>
 </div>
@@ -265,65 +254,122 @@
 </main>
 
 <script>
-  /*
-   * SECTION_H: the pixel height of one complete image set.
-   * The track is 2× this tall; the animation moves exactly -50% (= -SECTION_H px).
-   * Adjust this if you add more images and need more vertical space.
+  /* ── Base images ────────────────────────────────────────────────────────────
+   * Only the source data lives here. Position and order are generated at
+   * runtime so the sequence is different on every page load.
    */
-  const SECTION_H = 1700;
-
-  const projects = [
-    {
-      title: 'Doubt',               meta: 'medium, year', url: '#project-1',
-      img: 'images/Doubt01.jpg',
-      pos: { top: 50,   left: '4%',  width: '49%', height: 580 },
-    },
-    {
-      title: 'Monad Device v.1',    meta: 'medium, year', url: '#project-2',
-      img: 'images/Monad_Device_v.1_01j.jpg',
-      pos: { top: 50,   left: '56%', width: '37%', height: 255 },
-    },
-    {
-      title: 'Network Triptych',    meta: 'medium, year', url: '#project-3',
-      img: 'images/Network_Triptych03_Detail.jpg',
-      pos: { top: 345,  left: '55%', width: '35%', height: 460 },
-    },
-    {
-      title: 'Socrates Organism',   meta: 'medium, year', url: '#project-4',
-      img: 'images/Socrates_Organism02.jpg',
-      pos: { top: 670,  left: '7%',  width: '45%', height: 300 },
-    },
-    {
-      title: 'Stealth Phrenology',  meta: 'medium, year', url: '#project-5',
-      img: 'images/Stealth_Phrenology01.jpg',
-      pos: { top: 1020, left: '28%', width: '50%', height: 400 },
-    },
+  const baseImages = [
+    { title: 'Doubt',              meta: 'medium, year', url: '#project-1', img: 'images/Doubt01.jpg'                   },
+    { title: 'Monad Device v.1',   meta: 'medium, year', url: '#project-2', img: 'images/Monad_Device_v.1_01j.jpg'      },
+    { title: 'Network Triptych',   meta: 'medium, year', url: '#project-3', img: 'images/Network_Triptych03_Detail.jpg' },
+    { title: 'Socrates Organism',  meta: 'medium, year', url: '#project-4', img: 'images/Socrates_Organism02.jpg'       },
+    { title: 'Stealth Phrenology', meta: 'medium, year', url: '#project-5', img: 'images/Stealth_Phrenology01.jpg'      },
+    { title: 'Monad Device',       meta: 'medium, year', url: '#project-6', img: 'images/Monad_Device.gif'              },
   ];
 
-  const track = document.getElementById('track');
-  track.style.height = (SECTION_H * 2) + 'px';
+  /* ── Layout position pool ───────────────────────────────────────────────────
+   * A varied set of horizontal positions to draw from. Each pass through the
+   * images picks 6 at random, so size and placement differ every cycle.
+   */
+  const layouts = [
+    { left: '4%',  width: '48%' }, { left: '52%', width: '40%' },
+    { left: '7%',  width: '43%' }, { left: '50%', width: '44%' },
+    { left: '20%', width: '52%' }, { left: '55%', width: '37%' },
+    { left: '5%',  width: '46%' }, { left: '48%', width: '44%' },
+    { left: '10%', width: '50%' }, { left: '56%', width: '36%' },
+    { left: '14%', width: '55%' }, { left: '3%',  width: '45%' },
+    { left: '45%', width: '48%' }, { left: '22%', width: '50%' },
+    { left: '58%', width: '34%' },
+  ];
 
-  function makeItem(p, offset, lazy) {
-    const { top, left, width, height } = p.pos;
-    const el = document.createElement('a');
-    el.className = 'project';
-    el.href = p.url;
-    el.style.cssText = `top:${top + offset}px;left:${left};width:${width};height:${height}px;`;
-    el.innerHTML =
-      `<img src="${p.img}" alt="${p.title}"${lazy ? ' loading="lazy"' : ''}>` +
-      `<div class="project-label">` +
-        `<span class="project-title">${p.title}</span>` +
-        `<span class="project-meta">${p.meta}</span>` +
-      `</div>`;
-    return el;
+  const PASSES         = 6;    // shuffled cycles → 36 items before any repeat
+  const STEP           = 0.70; // step when overlapping: image starts 30% into the previous one
+  const BREATHE_CHANCE = 0.1; // probability (0–1) an image gets space instead of overlap
+  const BREATHE_STEP   = 1; // step when breathing: image starts 20% below the previous bottom
+  const PADDING        = 50;   // px breathing room before/after the set
+  const SCROLL_SPEED   = 200;  // px/s — keeps visual pace consistent regardless of content size
+
+  /* ── Fisher-Yates shuffle ───────────────────────────────────────────────── */
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   }
 
-  // first set: eager-load (visible on initial paint)
-  projects.forEach(p => track.appendChild(makeItem(p, 0, false)));
-  // duplicate set: lazy-load (only needed mid-loop)
-  projects.forEach(p => track.appendChild(makeItem(p, SECTION_H, true)));
+  /* ── Build the sequence: PASSES independently shuffled cycles ───────────── */
+  const sequence = [];
+  for (let pass = 0; pass < PASSES; pass++) {
+    // Reshuffle until the first image of this cycle differs from the last
+    // image of the previous cycle (avoids the same image appearing back-to-back
+    // across the cycle boundary).
+    let imgs = shuffle(baseImages);
+    if (sequence.length > 0) {
+      const lastSrc = sequence[sequence.length - 1].img;
+      while (imgs[0].img === lastSrc) imgs = shuffle(baseImages);
+    }
+    const lays = shuffle(layouts).slice(0, baseImages.length);
+    imgs.forEach((img, i) => sequence.push({ ...img, ...lays[i] }));
+  }
 
-  // mobile hamburger
+  const track    = document.getElementById('track');
+  const scroller = document.querySelector('.scroller');
+
+  /* ── Preload each unique image src once, then build layout ─────────────── */
+  const uniqueSrcs = [...new Set(sequence.map(p => p.img))];
+  Promise.all(uniqueSrcs.map(src => new Promise(res => {
+    const img = new Image();
+    img.onload  = () => res([src, img.naturalWidth, img.naturalHeight]);
+    img.onerror = () => res([src, 4, 3]);
+    img.src = src;
+  }))).then(results => {
+    const dimsMap  = Object.fromEntries(results.map(([src, w, h]) => [src, [w, h]]));
+    const containerW = scroller.offsetWidth;
+
+    const pxW = sequence.map(p => parseFloat(p.width) / 100 * containerW);
+    const pxH = sequence.map((p, i) => {
+      const [nw, nh] = dimsMap[p.img];
+      return Math.round(pxW[i] * nh / nw);
+    });
+
+    /* Cascade: each image either overlaps or breathes based on BREATHE_CHANCE */
+    const tops = new Array(sequence.length);
+    tops[0] = PADDING;
+    for (let i = 1; i < sequence.length; i++) {
+      const step = Math.random() < BREATHE_CHANCE ? BREATHE_STEP : STEP;
+      tops[i] = tops[i - 1] + Math.round(pxH[i - 1] * step);
+    }
+
+    const last      = sequence.length - 1;
+    const SECTION_H = tops[last] + pxH[last] + PADDING;
+
+    track.style.height            = (SECTION_H * 2) + 'px';
+    track.style.animationDuration = Math.round(SECTION_H / SCROLL_SPEED) + 's';
+
+    function makeItem(p, i, offset, lazy) {
+      const el = document.createElement('a');
+      el.className = 'project';
+      el.href = p.url;
+      el.style.cssText =
+        `top:${tops[i] + offset}px;left:${p.left};width:${p.width};z-index:${i + 1};`;
+      el.innerHTML =
+        `<img src="${p.img}" alt="${p.title}"${lazy ? ' loading="lazy"' : ''}>` +
+        `<div class="project-label">` +
+          `<span class="project-title">${p.title}</span>` +
+          `<span class="project-meta">${p.meta}</span>` +
+        `</div>`;
+      el.addEventListener('mouseenter', () => { if (window.innerWidth > 820) track.style.animationPlayState = 'paused'; });
+      el.addEventListener('mouseleave', () => { if (window.innerWidth > 820) track.style.animationPlayState = 'running'; });
+      return el;
+    }
+
+    sequence.forEach((p, i) => track.appendChild(makeItem(p, i, 0,         false)));
+    sequence.forEach((p, i) => track.appendChild(makeItem(p, i, SECTION_H, true)));
+  });
+
+  /* ── Mobile hamburger ───────────────────────────────────────────────────── */
   const navEl = document.getElementById('mobileNav');
   document.getElementById('hamburger').addEventListener('click', () =>
     navEl.classList.toggle('nav-open')
