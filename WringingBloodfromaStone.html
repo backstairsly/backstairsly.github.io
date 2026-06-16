@@ -152,11 +152,13 @@
     box-shadow: 0 4px 14px rgba(0,0,0,0.13);
   }
   
-  .artwork video {
+  .artwork video,
+  .artwork iframe {
     display: block;
-    max-height: 75vh;
-    width: auto;
-    max-width: 75%;
+    width: 640px;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
     box-shadow: 0 4px 14px rgba(0,0,0,0.13);
   }
 
@@ -168,7 +170,7 @@
     font-size: 20px;
 	font-weight: 600;
 	color: var(--ink);
-	margin-bottom: 12px;
+	margin-bottom: 24px;
 	margin-left: 2vh;
   }
 	
@@ -221,7 +223,7 @@
   .gallery-split > .artwork img {
     width: 100%;
     max-height: none;
-	margin-bottom: 18px;
+	margin-bottom: 48px
   }
 
   /* ── MOBILE ──────────────────────────────────── */
@@ -229,7 +231,7 @@
     .nav-desktop { display: none; }
     .nav-mobile  { display: block; }
     .main { margin-left: 0; padding: 80px 20px 48px; }
-    .artwork img { max-height: none; width: 100%; }
+    .artwork img, .artwork video, .artwork iframe { max-height: none; width: 100%; }
     .gallery-split { flex-direction: column; }
     .gallery-split > .artwork,
     .gallery-split > .artwork-meta {
@@ -288,6 +290,9 @@
       <figure class="artwork">
         <img src="images/oWBfaS_Install_view.png" alt="Install view">
       </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">Installation View</h2>
+	  </div>
     </div>
 
     <div class="gallery-item">
@@ -306,18 +311,27 @@
       <figure class="artwork">
         <img src="images/Doubt02_Detail.jpg" alt="Doubt — detail view">
       </figure>
+	  <div class="artwork-meta">
+        <h2 class="artwork-title">Doubt - detail</h2>
+	  </div>
     </div>
 
     <div class="gallery-item">
       <figure class="artwork">
         <img src="images/Doubt03_back.jpg" alt="Doubt — back view">
       </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">Doubt - back view</h2>
+	  </div>
     </div>
 	
 	<div class="gallery-item">
 	  <figure class="artwork">
-	    <video src="images/Doubt04_video1080.mp4" autoplay loop muted playsinline></video>
+	    <iframe src="https://drive.google.com/file/d/1pxRwYoZ1KiaI14bC-24oOQ4qHV1XMpDP/preview" allowfullscreen></iframe>
 	  </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">Doubt - demo video</h2>
+	  </div>
 	</div>
 	
     <div class="gallery-item">
@@ -325,11 +339,98 @@
         <img src="images/Monad_Device_v.1_01j.jpg" alt="Monad Device v1">
       </figure>
       <div class="artwork-meta">
-        <h2 class="artwork-title">Monad Device v.1</h2>
+        <h2 class="artwork-title">Monad Device v.1<i>(2025)</i></h2>
         <p class="artwork-materials-text">
           Ulexite, crystal magnifying dome, acrylic, wrought iron stand, iPad 10.2-inch, Google Earth Studio satellite photography
         </p>
       </div>
+    </div>
+	
+	<div class="gallery-item">
+      <figure class="artwork">
+        <img src="images/Monad_Device_v.1_02_detail.jpg" alt="Monad Device v1">
+      </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">Monad Device v.1 - detail view</h2>
+	  </div>
+    </div>
+	
+	 <div class="gallery-item">
+      <figure class="artwork">
+        <iframe src="https://drive.google.com/file/d/1K5T3KIkEm5mXnxnNqe4Rv-H6K5i13273/preview"  allowfullscreen></iframe>
+      </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">Monad Device v.1 - demo video 1</h2>
+	  </div>
+    </div>
+	
+	 <div class="gallery-item">
+      <figure class="artwork">
+        <iframe src="https://drive.google.com/file/d/11SMR0MgBhpPaZ_a1OjefcC2Lffl4MF14/preview" allowfullscreen></iframe>
+      </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">Monad Device v.1 - demo video 2</h2>
+	  </div>
+    </div>
+	
+	<div class="gallery-item">
+      <figure class="artwork">
+        <img src="images/Network_Triptych01.jpg" alt="Network Triptych">
+      </figure>
+      <div class="artwork-meta">
+        <h2 class="artwork-title">Network Triptych<i>(2025)</i></h2>
+        <p class="artwork-materials-text">
+          Netgear N750 Wireless Dual Band Router, Netgear R6300 Smart Wifi Router, ECO-UV inks
+        </p>
+      </div>
+    </div>
+	
+	<div class="gallery-item">
+      <figure class="artwork">
+        <img src="images/Network_Triptych02_Detail-2.jpg" alt="Network Triptych - detail 1">
+      </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">Network Triptych - detail 1</h2>
+	  </div>
+    </div>
+	
+	<div class="gallery-item">
+      <figure class="artwork">
+        <img src="images/Network_Triptych03_Detail.jpg" alt="Network Triptych - detail 2">
+      </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">Network Triptych - detail 2</h2>
+	  </div>
+    </div>
+	
+	<div class="gallery-item">
+      <figure class="artwork">
+        <img src="images/Network_Triptych04_Detail.jpg" alt="Network Triptych - detail 3">
+      </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">Network Triptych - detail 3</h2>
+	  </div>
+    </div>
+	
+	<div class="gallery-item">
+      <figure class="artwork">
+        <img src="images/I_dont_press_search01.jpg" alt="I don't press search...">
+      </figure>
+      <div class="artwork-meta">
+        <h2 class="artwork-title">"I don't press search, but I am Searching"<i>(2025)</i></h2>
+        <p class="artwork-materials-text">
+          Dual Band 2.4 GHz /5.8 GHz 8dBi Antennas, Drywall
+        </p>
+      </div>
+    </div>
+	
+	<div class="gallery-item">
+      <figure class="artwork">
+        <img src="images/I_dont_press_search02_detail-2.jpg" alt="I don't press search...">
+      </figure>
+	   <div class="artwork-meta">
+        <h2 class="artwork-title">"I don't press search, but I am Searching" - detail view</h2>
+	  </div>
     </div>
 
   </div>
