@@ -175,7 +175,7 @@
   }
 	
   .artwork-title {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
     letter-spacing: -0.01em;
     color: var(--ink);
@@ -237,6 +237,7 @@
     .gallery-split > .artwork-meta {
       width: 100%;
     }
+    [id] { scroll-margin-top: 80px; }
   }
 </style>
 </head>
@@ -244,26 +245,26 @@
 
 <!-- DESKTOP NAV -->
 <nav class="nav-desktop">
-  <div class="brand">Lucy Weaver</div>
+  <a class="brand" href="index.html">Lucy Weaver</a>
   <div class="nav-list">
-    <a href="index.html">Work</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="mailto:lucy.weaver012@gmail.com">Contact</a>
   </div>
 </nav>
 
 <!-- MOBILE NAV -->
 <div class="nav-mobile" id="mobileNav">
   <div class="mobile-bar">
-    <div class="brand">Lucy Weaver</div>
+    <a class="brand" href="index.html">Lucy Weaver</a>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
   <div class="mobile-menu">
-    <a href="index.html">Work</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="mailto:lucy.weaver012@gmail.com">Contact</a>
   </div>
 </div>
 
@@ -295,12 +296,12 @@
 	  </div>
     </div>
 
-    <div class="gallery-item">
+    <div class="gallery-item" id="doubt">
       <figure class="artwork">
         <img src="images/Doubt01.jpg" alt="Doubt">
       </figure>
       <div class="artwork-meta">
-        <h2 class="artwork-title">Doubt<i>(2025)</i></h2>
+        <h2 class="artwork-title">Doubt <i>(2025)</i></h2>
         <p class="artwork-materials-text">
           Polylactic acid, stainless steel staples, polyvinyl acetate filler, automotive filler primer, latex, alcohol soluble paints, iPhone 7 
         </p>
@@ -334,7 +335,7 @@
 	  </div>
 	</div>
 	
-    <div class="gallery-item">
+    <div class="gallery-item" id="monad-device">
       <figure class="artwork">
         <img src="images/Monad_Device_v.1_01j.jpg" alt="Monad Device v1">
       </figure>
@@ -373,7 +374,7 @@
 	  </div>
     </div>
 	
-	<div class="gallery-item">
+	<div class="gallery-item" id="network-triptych">
       <figure class="artwork">
         <img src="images/Network_Triptych01.jpg" alt="Network Triptych">
       </figure>
@@ -412,7 +413,7 @@
 	  </div>
     </div>
 	
-	<div class="gallery-item">
+	<div class="gallery-item" id="i-dont-press-search">
       <figure class="artwork">
         <img src="images/I_dont_press_search01.jpg" alt="I don't press search...">
       </figure>
@@ -432,7 +433,7 @@
         <h2 class="artwork-title">"I don't press search, but I am Searching" - detail view</h2>
 	  </div>
     </div>
-
+	
   </div>
 </main>
 

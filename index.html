@@ -201,26 +201,26 @@
 
 <!-- DESKTOP NAV -->
 <nav class="nav-desktop">
-  <div class="brand">Lucy Weaver</div>
+  <a class="brand" href="index.html">Lucy Weaver</a>
   <div class="nav-list">
-    <a href="#">Work</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="mailto:lucy.weaver012@gmail.com">Contact</a>
   </div>
 </nav>
 
 <!-- MOBILE NAV -->
 <div class="nav-mobile" id="mobileNav">
   <div class="mobile-bar">
-    <div class="brand">Lucy Weaver</div>
+    <a class="brand" href="index.html">Lucy Weaver</a>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
   <div class="mobile-menu">
-    <a href="#">Work</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="mailto:lucy.weaver012@gmail.com">Contact</a>
   </div>
 </div>
 
@@ -237,12 +237,12 @@
    * runtime so the sequence is different on every page load.
    */
   const baseImages = [
-    { title: 'Doubt',              meta: '2025', url: 'WringingBloodfromaStone.html', img: 'images/Doubt01.jpg'                   },
-    { title: 'Monad Device v.1',   meta: '2025', url: '#project-2', img: 'images/Monad_Device_v.1_01j.jpg'      },
-    { title: 'Network Triptych',   meta: '2025', url: '#project-3', img: 'images/Network_Triptych03_Detail.jpg' },
-    { title: 'Socrates Organism',  meta: '2025', url: '#project-4', img: 'images/Socrates_Organism02.jpg'       },
-    { title: 'Stealth Phrenology', meta: '2025', url: '#project-5', img: 'images/Stealth_Phrenology01.jpg'      },
-    { title: 'Monad Device',       meta: '2025', url: '#project-6', img: 'images/Monad_Device.gif'              },
+    { title: 'Doubt',              meta: '2025', url: 'WringingBloodfromaStone.html#doubt', img: 'images/Doubt01.jpg'},
+    { title: 'Monad Device v.1',   meta: '2025', url: 'WringingBloodfromaStone.html#monad-device',      img: 'images/Monad_Device_v.1_01j.jpg'      },
+    { title: 'Network Triptych',   meta: '2025', url: 'WringingBloodfromaStone.html#network-triptych',  img: 'images/Network_Triptych03_Detail.jpg' },
+    { title: 'Socrates Organism',  meta: '2025', url: '#',                                               img: 'images/Socrates_Organism02.jpg'       },
+    { title: 'Stealth Phrenology', meta: '2025', url: '#',                                               img: 'images/Stealth_Phrenology01.jpg'      },
+    { title: 'Monad Device',       meta: '2025', url: 'WringingBloodfromaStone.html#monad-device',      img: 'images/Monad_Device.gif'              },
   ];
 
   /* ── Layout position pool ───────────────────────────────────────────────────
