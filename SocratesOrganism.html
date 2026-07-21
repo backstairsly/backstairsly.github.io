@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Work — Lucy Weaver">
-<title>Work — Lucy Weaver</title>
+<meta name="description" content="Socrates Organism — Lucy Weaver">
+<title>Socrates Organism — Lucy Weaver</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
@@ -123,69 +123,105 @@
     border-bottom: 1px solid rgba(26,24,19,0.08);
   }
 
-  /* ── PAGE ────────────────────────────────────── */
+  /* ── PROJECT PAGE ────────────────────────────── */
   .main {
     margin-left: var(--col-width);
     min-height: 100vh;
     padding: 36px;
   }
 
-  .work-list {
-    list-style: none;
+  .gallery {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 12px;
   }
 
-  .work-list > li > a,
-  .accordion-header {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 40px;
-    font-weight: 400;
-    line-height: 1.15;
-    color: var(--ink);
-    display: inline-block;
-    background: none;
+  .gallery-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .artwork img {
+    display: block;
+    max-height: 75vh;
+    width: auto;
+    max-width: 100%;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.13);
+  }
+
+  .artwork video,
+  .artwork iframe {
+    display: block;
+    width: 640px;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
     border: none;
-    padding: 0;
-    text-align: left;
-    cursor: pointer;
-    transition: color 0.25s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.13);
   }
 
-  .work-list > li > a:hover,
-  .accordion-header:hover {
-    color: var(--accent);
+  .artwork-meta {
+    max-width: 100ch;
   }
 
-  .accordion-body {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.35s ease;
+  .artwork-project-title {
+    font-size: 20px;
+	font-weight: 600;
+	color: var(--ink);
+	margin-bottom: 24px;
+	margin-left: 2vh;
   }
 
-  .accordion.open .accordion-body {
-    max-height: 300px;
-  }
-
-  .sub-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 4px 0 8px 2.5em;
-  }
-
-  .sub-list a {
-    font-size: 14px;
-    line-height: 1.6;
+  .artwork-title {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
     color: var(--ink);
-    display: inline-block;
-    transition: color 0.25s ease;
+    margin-bottom: 6px;
+	margin-left: 2vh;
   }
 
-  .sub-list a:hover {
-    color: var(--accent);
+  .artwork-text {
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.7;
+	margin-left: 2vh;
+  }
+
+  .artwork-materials-text {
+    font-style: italic;
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.7;
+	margin-left: 2vh;
+  }
+
+  .artwork-space {
+	display: flex;
+	gap: 6px;
+  }
+
+  .gallery-split {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .gallery-split > .artwork,
+  .gallery-split > .artwork-meta {
+    flex: .4;
+    width: 50%;
+  }
+
+  .gallery-split > .artwork-meta {
+    text-align: left;
+  }
+
+  .gallery-split > .artwork img {
+    width: 100%;
+    max-height: none;
+	margin-bottom: 48px
   }
 
   /* ── MOBILE ──────────────────────────────────── */
@@ -193,8 +229,13 @@
     .nav-desktop { display: none; }
     .nav-mobile  { display: block; }
     .main { margin-left: 0; padding: 80px 20px 48px; }
-    .work-list > li > a,
-    .accordion-header { font-size: 28px; }
+    .artwork img, .artwork video, .artwork iframe { max-height: none; width: 100%; }
+    .gallery-split { flex-direction: column; }
+    .gallery-split > .artwork,
+    .gallery-split > .artwork-meta {
+      width: 100%;
+    }
+    [id] { scroll-margin-top: 80px; }
   }
 </style>
 </head>
@@ -227,26 +268,27 @@
 
 <!-- MAIN -->
 <main class="main">
-  <ul class="work-list">
-    <li class="accordion">
-      <button class="accordion-header">Wringing Blood from a Stone (solo show)</button>
-      <div class="accordion-body">
-        <ul class="sub-list">
-          <li><a href="WringingBloodfromaStone.html">Intro</a></li>
-          <li><a href="WringingBloodfromaStone.html#doubt">Doubt</a></li>
-          <li><a href="WringingBloodfromaStone.html#monad-device">Monad Device v.1</a></li>
-          <li><a href="WringingBloodfromaStone.html#network-triptych">Network Triptych</a></li>
-          <li><a href="WringingBloodfromaStone.html#i-dont-press-search">"I don't press search..."</a></li>
-          <li><a href="other_assets/Wring Blood from a Stone booklet_fix.pdf" target="_blank" rel="noopener">Booklet</a></li>
-          <li><a href="other_assets/Wringing Blood From A Stone_ Interview w_ Lewis Thelen.pdf" target="_blank" rel="noopener">Dialogue with Lewis Thelen</a></li>
-        </ul>
+  <div class="gallery">
+    <div class="gallery-item" id="socrates-organism">
+      <figure class="artwork">
+        <img src="images/Socrates_Organism02.jpg" alt="Socrates Organism">
+      </figure>
+      <div class="artwork-meta">
+        <h2 class="artwork-title">Socrates Organism <i>(2021)</i></h2>
+        <p class="artwork-materials-text">PLA/PHA compound with 30% recycled wood fibers, grey-oyster mushroom spores, inoculated rye berries, lime-pasturized straw, micropore surgical tape</p>
       </div>
-    </li>
-    <li><a href="#">Pink Things</a></li>
-    <li><a href="#">Gelatin Compute</a></li>
-    <li><a href="StealthPhrenology.html">Stealth Phrenology</a></li>
-    <li><a href="SocratesOrganism.html">Socrates Organism</a></li>
-  </ul>
+    </div>
+
+    <div class="gallery-item">
+      <figure class="artwork">
+        <img src="images/Socrates_Organism01_cropped.jpg" alt="Socrates Organism">
+      </figure>
+      <div class="artwork-meta">
+        <h2 class="artwork-title">Socrates Organism <i>(2021)</i></h2>
+        <p class="artwork-materials-text">Durational sculpture, in which oyster mushrooms grow within and eventually consume a 3D printed mold. Photographed on the 1st day and 30th day of its growth cycle.<br><br>The mold utilizes a 3D scan of a bust from the British Museum, created by Daniel Prett, and shared under a CC BY-NC-SA 4.0 license. This model has been edited in Rhino using a custom Grasshopper script to uniformly create holes in the surface and prepare the model for 3d printing.</p>
+      </div>
+    </div>
+  </div>
 </main>
 
 <script>
@@ -254,12 +296,6 @@
   document.getElementById('hamburger').addEventListener('click', () =>
     navEl.classList.toggle('nav-open')
   );
-
-  document.querySelectorAll('.accordion-header').forEach(btn => {
-    btn.addEventListener('click', () =>
-      btn.closest('.accordion').classList.toggle('open')
-    );
-  });
 </script>
 </body>
 </html>
