@@ -12,7 +12,6 @@
   :root {
     --bg: #e8eaed;
     --ink: #1c1f24;
-    --muted: #7a7e87;
     --accent: #0000FF;
     --col-width: 220px;
   }
@@ -150,7 +149,6 @@
     box-shadow: 0 4px 14px rgba(0,0,0,0.13);
   }
 
-  .artwork video,
   .artwork iframe {
     display: block;
     width: 640px;
@@ -196,9 +194,11 @@
 	margin-left: 2vh;
   }
 
-  .artwork-space {
-	display: flex;
-	gap: 6px;
+  .artwork-exposition-text {
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.7;
+	margin-left: 2vh;
   }
 
   .gallery-split {
@@ -229,7 +229,7 @@
     .nav-desktop { display: none; }
     .nav-mobile  { display: block; }
     .main { margin-left: 0; padding: 80px 20px 48px; }
-    .artwork img, .artwork video, .artwork iframe { max-height: none; width: 100%; }
+    .artwork img, .artwork iframe { max-height: none; width: 100%; }
     .gallery-split { flex-direction: column; }
     .gallery-split > .artwork,
     .gallery-split > .artwork-meta {
@@ -285,7 +285,7 @@
       </figure>
       <div class="artwork-meta">
         <h2 class="artwork-title">Socrates Organism <i>(2021)</i></h2>
-        <p class="artwork-materials-text">Durational sculpture, in which oyster mushrooms grow within and eventually consume a 3D printed mold. Photographed on the 1st day and 30th day of its growth cycle.<br><br>The mold utilizes a 3D scan of a bust from the British Museum, created by Daniel Prett, and shared under a CC BY-NC-SA 4.0 license. This model has been edited in Rhino using a custom Grasshopper script to uniformly create holes in the surface and prepare the model for 3d printing.</p>
+        <p class="artwork-exposition-text">Durational sculpture, in which oyster mushrooms grow within and eventually consume a 3D printed mold. Photographed on the 1st day and 30th day of its growth cycle.<br><br>The mold utilizes a 3D scan of a bust from the British Museum, created by Daniel Prett, and shared under a CC BY-NC-SA 4.0 license. This model has been edited in Rhino using a custom Grasshopper script to uniformly create holes in the surface and prepare the model for 3d printing.</p>
       </div>
     </div>
   </div>

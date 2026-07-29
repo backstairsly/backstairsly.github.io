@@ -12,7 +12,6 @@
   :root {
     --bg: #e8eaed;
     --ink: #1c1f24;
-    --muted: #7a7e87;
     --accent: #0000FF;
     --col-width: 220px;
   }
@@ -152,7 +151,6 @@
     box-shadow: 0 4px 14px rgba(0,0,0,0.13);
   }
   
-  .artwork video,
   .artwork iframe {
     display: block;
     width: 640px;
@@ -198,11 +196,13 @@
 	margin-left: 2vh;
   }
   
-  .artwork-space {
-	display: flex;
-	gap: 6px;
+  .artwork-exposition-text {
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.7;
+	margin-left: 2vh;
   }
-
+  
   .gallery-split {
     display: flex;
     flex-direction: row;
@@ -231,7 +231,7 @@
     .nav-desktop { display: none; }
     .nav-mobile  { display: block; }
     .main { margin-left: 0; padding: 80px 20px 48px; }
-    .artwork img, .artwork video, .artwork iframe { max-height: none; width: 100%; }
+    .artwork img, .artwork iframe { max-height: none; width: 100%; }
     .gallery-split { flex-direction: column; }
     .gallery-split > .artwork,
     .gallery-split > .artwork-meta {
@@ -441,7 +441,7 @@
       </figure>
 	   <div class="artwork-meta">
         <h2 class="artwork-title">WBfaS accompanying text - flip thru</h2>
-        <p class="artwork-materials-text"><a href="other_assets/Wring Blood from a Stone booklet_fix.pdf" target="_blank" rel="noopener" style="color:#0000FF;text-decoration:underline;">Click here</a> to view this booklet digitally</p>
+        <p class="artwork-exposition-text"><a href="other_assets/Wring Blood from a Stone booklet_fix.pdf" target="_blank" rel="noopener" style="color:#0000FF;text-decoration:underline;">Click here</a> to view this booklet digitally</p>
 	  </div>
     </div>
 

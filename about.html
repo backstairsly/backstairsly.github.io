@@ -12,7 +12,6 @@
   :root {
     --bg: #e8eaed;
     --ink: #1c1f24;
-    --muted: #7a7e87;
     --accent: #0000FF;
     --col-width: 220px;
   }
@@ -123,11 +122,106 @@
     border-bottom: 1px solid rgba(26,24,19,0.08);
   }
 
-  /* ── PAGE ────────────────────────────────────── */
+  /* ── PROJECT PAGE ────────────────────────────── */
   .main {
     margin-left: var(--col-width);
     min-height: 100vh;
     padding: 36px;
+  }
+
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .gallery-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .artwork img {
+    display: block;
+    max-height: 75vh;
+    width: auto;
+    max-width: 100%;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.13);
+  }
+
+  .artwork iframe {
+    display: block;
+    width: 640px;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.13);
+  }
+
+  .artwork-meta {
+    max-width: 100ch;
+  }
+
+  .artwork-project-title {
+    font-size: 20px;
+	font-weight: 600;
+	color: var(--ink);
+	margin-bottom: 24px;
+	margin-left: 2vh;
+  }
+
+  .artwork-title {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 6px;
+	margin-left: 2vh;
+  }
+
+  .artwork-text {
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.7;
+	margin-left: 2vh;
+  }
+
+  .artwork-materials-text {
+    font-style: italic;
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.7;
+	margin-left: 2vh;
+  }
+
+  .artwork-exposition-text {
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.7;
+	margin-left: 2vh;
+  }
+
+  .gallery-split {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .gallery-split > .artwork,
+  .gallery-split > .artwork-meta {
+    flex: .4;
+    width: 50%;
+  }
+
+  .gallery-split > .artwork-meta {
+    text-align: left;
+  }
+
+  .gallery-split > .artwork img {
+    width: 100%;
+    max-height: none;
+	margin-bottom: 48px
   }
 
   /* ── MOBILE ──────────────────────────────────── */
@@ -135,6 +229,13 @@
     .nav-desktop { display: none; }
     .nav-mobile  { display: block; }
     .main { margin-left: 0; padding: 80px 20px 48px; }
+    .artwork img, .artwork iframe { max-height: none; width: 100%; }
+    .gallery-split { flex-direction: column; }
+    .gallery-split > .artwork,
+    .gallery-split > .artwork-meta {
+      width: 100%;
+    }
+    [id] { scroll-margin-top: 80px; }
   }
 </style>
 </head>
@@ -167,6 +268,21 @@
 
 <!-- MAIN -->
 <main class="main">
+ <div class="gallery-item gallery-split">
+      <figure class="artwork">
+        <img src="images/wringingbloodfromastone_poster.jpg" alt="Wringing Blood from a Stone — poster">
+      </figure>
+      <div class="artwork-meta">
+        <p class="artwork-text">
+          <b>Lucy Weaver</b> is an interdisciplinary artist and educator born in New Philadelphia, OH, based in Ann Arbor, Michigan. 
+		  Weaver earned her Bachelors of Science from the University of Cincinnati DAAP in Industrial Design (2021), 
+		  and is currently completing her Masters of Fine Arts in Visual Arts at the University of Michigan STAMPS.<br><br>
+		  Her practice is driven by deep research, focusing on the interwoven narrative of technology, belief, and conceptions of the human body.
+		  Her work exposes this narrative’s effect on human perception, both historically and speculatively. 
+		  
+        </p>
+      </div>
+    </div>
 </main>
 
 <script>

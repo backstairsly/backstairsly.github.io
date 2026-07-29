@@ -12,7 +12,6 @@
   :root {
     --bg: #e8eaed;
     --ink: #1c1f24;
-    --muted: #7a7e87;
     --accent: #0000FF;
     --col-width: 220px;
   }
@@ -152,7 +151,6 @@
     box-shadow: 0 4px 14px rgba(0,0,0,0.13);
   }
   
-  .artwork video,
   .artwork iframe {
     display: block;
     width: 640px;
@@ -173,7 +171,7 @@
 	margin-bottom: 24px;
 	margin-left: 2vh;
   }
-	
+
   .artwork-title {
     font-size: 12px;
     font-weight: 400;
@@ -189,7 +187,7 @@
     line-height: 1.7;
 	margin-left: 2vh;
   }
-  
+
   .artwork-materials-text {
     font-style: italic;
     color: var(--ink);
@@ -197,10 +195,12 @@
     line-height: 1.7;
 	margin-left: 2vh;
   }
-  
-  .artwork-space {
-	display: flex;
-	gap: 6px;
+
+  .artwork-exposition-text {
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.7;
+	margin-left: 2vh;
   }
 
   .gallery-split {
@@ -231,7 +231,7 @@
     .nav-desktop { display: none; }
     .nav-mobile  { display: block; }
     .main { margin-left: 0; padding: 80px 20px 48px; }
-    .artwork img, .artwork video, .artwork iframe { max-height: none; width: 100%; }
+    .artwork img, .artwork iframe { max-height: none; width: 100%; }
     .gallery-split { flex-direction: column; }
     .gallery-split > .artwork,
     .gallery-split > .artwork-meta {
@@ -289,7 +289,7 @@
       </figure>
 	   <div class="artwork-meta">
         <h2 class="artwork-title">Stealth Phrenology... - demo video</h2>
-		  <p class="artwork-materials-text">
+		  <p class="artwork-exposition-text">
          Three screens display loops of character creation menus in video games. In each video, the same personage (a self portrait of the artist) is created across different game engines.
           </p>
 	  </div>
