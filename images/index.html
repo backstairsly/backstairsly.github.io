@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio — artist & maker">
+<title>Studio — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #e8eaed;
+    --ink: #1c1f24;
+    --accent: #0000FF;
+    --col-width: 220px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── DESKTOP NAV ─────────────────────────────── */
+  .nav-desktop {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--col-width);
+    height: 100vh;
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    background: var(--bg);
+    border-right: 1px solid rgba(26,24,19,0.08);
+  }
+  .brand {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 56px;
+  }
+  .nav-list { display: flex; flex-direction: column; gap: 2px; }
+  .nav-list a {
+    font-size: 16px;
+    padding: 5px 0;
+    color: var(--ink);
+    position: relative;
+    width: fit-content;
+    transition: color 0.25s ease;
+  }
+  .nav-list a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 3px;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .nav-list a:hover { color: var(--accent); }
+  .nav-list a:hover::after { width: 100%; }
+
+  /* ── MOBILE NAV ──────────────────────────────── */
+  .nav-mobile { display: none; }
+  .mobile-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(26,24,19,0.08);
+    z-index: 60;
+  }
+  .mobile-bar .brand { font-size: 20px; margin: 0; }
+  .hamburger {
+    width: 28px; height: 20px;
+    position: relative;
+    background: none; border: none;
+    cursor: pointer;
+  }
+  .hamburger span {
+    position: absolute;
+    left: 0; width: 100%; height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.35s ease, opacity 0.25s ease;
+  }
+  .hamburger span:nth-child(1) { top: 2px; }
+  .hamburger span:nth-child(2) { top: 9px; }
+  .hamburger span:nth-child(3) { top: 16px; }
+  .nav-open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-open .hamburger span:nth-child(2) { opacity: 0; }
+  .nav-open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    position: fixed;
+    inset: 60px 0 0 0;
+    background: var(--bg);
+    z-index: 55;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1), opacity 0.3s ease;
+  }
+  .nav-open .mobile-menu { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .mobile-menu a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 32px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(26,24,19,0.08);
+  }
+
+  /* ── SCROLLER ────────────────────────────────── */
+  .main { margin-left: var(--col-width); min-height: 100vh; }
+
+  .scroller {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── COLLAGE TRACK (desktop) ─────────────────── */
+  /* height set by JS; images are absolutely positioned */
+  .track {
+    position: relative;
+    animation: scrollUp 25s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes scrollUp {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-50%); }
+  }
+
+  .project {
+    position: absolute;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.13);
+  }
+  .project img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(0.12) contrast(1.02);
+    transition: transform 0.6s cubic-bezier(.2,.8,.2,1), filter 0.5s ease;
+  }
+  .project:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0) contrast(1.06);
+  }
+  .project-label {
+    position: absolute;
+    left: 0; bottom: 0;
+    padding: 14px 18px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .project:hover .project-label { opacity: 1; transform: translateY(0); }
+  .project-title { font-family: 'IBM Plex Mono', monospace; font-size: 20px; }
+  .project-meta  { font-size: 12px; font-style: italic; opacity: 0.85; }
+
+  /* ── MOBILE ─────────────────────────────────────────────────────────────── */
+  /* Collage layout (absolute positioning + overlap) is handled entirely by JS,
+   * scaled to the mobile container width — no overrides needed here.         */
+  @media (max-width: 820px) {
+    .nav-desktop { display: none; }
+    .nav-mobile  { display: block; }
+    .main { margin-left: 0; padding-top: 60px; }
+    .scroller { height: calc(100vh - 60px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- DESKTOP NAV -->
+<nav class="nav-desktop">
+  <a class="brand" href="index.html">Lucy Weaver</a>
+  <div class="nav-list">
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="mailto:lucy.weaver012@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile" id="mobileNav">
+  <div class="mobile-bar">
+    <a class="brand" href="index.html">Lucy Weaver</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu">
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="mailto:lucy.weaver012@gmail.com">Contact</a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="scroller">
+    <div class="track" id="track"></div>
+  </div>
+</main>
+
+<script>
+  /* ── Base images ────────────────────────────────────────────────────────────
+   * Only the source data lives here. Position and order are generated at
+   * runtime so the sequence is different on every page load.
+   */
+  const baseImages = [
+    { title: 'Doubt',              meta: '2025', url: 'WringingBloodfromaStone.html#doubt', img: 'images/Doubt01.jpg'},
+    { title: 'Monad Device v.1',   meta: '2025', url: 'WringingBloodfromaStone.html#monad-device',      img: 'images/Monad_Device_v.1_01j.jpg'      },
+    { title: 'Network Triptych',   meta: '2025', url: 'WringingBloodfromaStone.html#network-triptych',  img: 'images/Network_Triptych03_Detail.jpg' },
+    { title: 'Socrates Organism',  meta: '2025', url: 'SocratesOrganism.html',                          img: 'images/Socrates_Organism02.jpg'       },
+    { title: 'Stealth Phrenology', meta: '2025', url: 'StealthPhrenology.html',                          img: 'images/Stealth_Phrenology01.jpg'      },
+    { title: 'Monad Device',       meta: '2025', url: 'WringingBloodfromaStone.html#monad-device',      img: 'images/Monad_Device.gif'              },
+  ];
+
+  /* ── Layout position pool ───────────────────────────────────────────────────
+   * A varied set of horizontal positions to draw from. Each pass through the
+   * images picks 6 at random, so size and placement differ every cycle.
+   */
+  const layouts = [
+    { left: '4%',  width: '48%' }, { left: '52%', width: '40%' },
+    { left: '7%',  width: '43%' }, { left: '50%', width: '44%' },
+    { left: '20%', width: '52%' }, { left: '55%', width: '37%' },
+    { left: '5%',  width: '46%' }, { left: '48%', width: '44%' },
+    { left: '10%', width: '50%' }, { left: '56%', width: '36%' },
+    { left: '14%', width: '55%' }, { left: '3%',  width: '45%' },
+    { left: '45%', width: '48%' }, { left: '22%', width: '50%' },
+    { left: '58%', width: '34%' },
+  ];
+
+  const PASSES         = 6;    // shuffled cycles → 36 items before any repeat
+  const STEP           = 0.70; // step when overlapping: image starts 30% into the previous one
+  const BREATHE_CHANCE = 0.2; // probability (0–1) an image gets space instead of overlap
+  const BREATHE_STEP   = 1; // step when breathing: image starts 20% below the previous bottom
+  const PADDING        = 50;   // px breathing room before/after the set
+  const SCROLL_SPEED        = 200; // px/s desktop
+  const MOBILE_SCROLL_SPEED = 80;  // px/s mobile — slower to compensate for smaller images
+
+  /* ── Fisher-Yates shuffle ───────────────────────────────────────────────── */
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  /* ── Build the sequence: PASSES independently shuffled cycles ───────────── */
+  const sequence = [];
+  for (let pass = 0; pass < PASSES; pass++) {
+    // Reshuffle until the first image of this cycle differs from the last
+    // image of the previous cycle (avoids the same image appearing back-to-back
+    // across the cycle boundary).
+    let imgs = shuffle(baseImages);
+    if (sequence.length > 0) {
+      const lastSrc = sequence[sequence.length - 1].img;
+      while (imgs[0].img === lastSrc) imgs = shuffle(baseImages);
+    }
+    const lays = shuffle(layouts).slice(0, baseImages.length);
+    imgs.forEach((img, i) => sequence.push({ ...img, ...lays[i] }));
+  }
+
+  const track    = document.getElementById('track');
+  const scroller = document.querySelector('.scroller');
+
+  /* ── Preload each unique image src once, then build layout ─────────────── */
+  const uniqueSrcs = [...new Set(sequence.map(p => p.img))];
+  Promise.all(uniqueSrcs.map(src => new Promise(res => {
+    const img = new Image();
+    img.onload  = () => res([src, img.naturalWidth, img.naturalHeight]);
+    img.onerror = () => res([src, 4, 3]);
+    img.src = src;
+  }))).then(results => {
+    const dimsMap  = Object.fromEntries(results.map(([src, w, h]) => [src, [w, h]]));
+    const containerW = scroller.offsetWidth;
+
+    const pxW = sequence.map(p => parseFloat(p.width) / 100 * containerW);
+    const pxH = sequence.map((p, i) => {
+      const [nw, nh] = dimsMap[p.img];
+      return Math.round(pxW[i] * nh / nw);
+    });
+
+    /* Cascade: each image either overlaps or breathes based on BREATHE_CHANCE */
+    const tops = new Array(sequence.length);
+    tops[0] = PADDING;
+    for (let i = 1; i < sequence.length; i++) {
+      const step = Math.random() < BREATHE_CHANCE ? BREATHE_STEP : STEP;
+      tops[i] = tops[i - 1] + Math.round(pxH[i - 1] * step);
+    }
+
+    const last      = sequence.length - 1;
+    const SECTION_H = tops[last] + pxH[last] + PADDING;
+
+    const speed = window.innerWidth <= 820 ? MOBILE_SCROLL_SPEED : SCROLL_SPEED;
+    track.style.height            = (SECTION_H * 2) + 'px';
+    track.style.animationDuration = Math.round(SECTION_H / speed) + 's';
+
+    function makeItem(p, i, offset, lazy) {
+      const el = document.createElement('a');
+      el.className = 'project';
+      el.href = p.url;
+      el.style.cssText =
+        `top:${tops[i] + offset}px;left:${p.left};width:${p.width};z-index:${i + 1};`;
+      el.innerHTML =
+        `<img src="${p.img}" alt="${p.title}"${lazy ? ' loading="lazy"' : ''}>` +
+        `<div class="project-label">` +
+          `<span class="project-title">${p.title}</span>` +
+          `<span class="project-meta">${p.meta}</span>` +
+        `</div>`;
+      el.addEventListener('mouseenter', () => { if (window.innerWidth > 820) track.style.animationPlayState = 'paused'; });
+      el.addEventListener('mouseleave', () => { if (window.innerWidth > 820) track.style.animationPlayState = 'running'; });
+      return el;
+    }
+
+    sequence.forEach((p, i) => track.appendChild(makeItem(p, i, 0,         false)));
+    sequence.forEach((p, i) => track.appendChild(makeItem(p, i, SECTION_H, true)));
+  });
+
+  /* ── Mobile hamburger ───────────────────────────────────────────────────── */
+  const navEl = document.getElementById('mobileNav');
+  document.getElementById('hamburger').addEventListener('click', () =>
+    navEl.classList.toggle('nav-open')
+  );
+</script>
+</body>
+</html>

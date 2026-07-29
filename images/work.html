@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Work — Lucy Weaver">
+<title>Work — Lucy Weaver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #e8eaed;
+    --ink: #1c1f24;
+    --accent: #0000FF;
+    --col-width: 220px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── DESKTOP NAV ─────────────────────────────── */
+  .nav-desktop {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--col-width);
+    height: 100vh;
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    background: var(--bg);
+    border-right: 1px solid rgba(26,24,19,0.08);
+  }
+  .brand {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 56px;
+  }
+  .nav-list { display: flex; flex-direction: column; gap: 2px; }
+  .nav-list a {
+    font-size: 16px;
+    padding: 5px 0;
+    color: var(--ink);
+    position: relative;
+    width: fit-content;
+    transition: color 0.25s ease;
+  }
+  .nav-list a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 3px;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .nav-list a:hover { color: var(--accent); }
+  .nav-list a:hover::after { width: 100%; }
+
+  /* ── MOBILE NAV ──────────────────────────────── */
+  .nav-mobile { display: none; }
+  .mobile-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(26,24,19,0.08);
+    z-index: 60;
+  }
+  .mobile-bar .brand { font-size: 20px; margin: 0; }
+  .hamburger {
+    width: 28px; height: 20px;
+    position: relative;
+    background: none; border: none;
+    cursor: pointer;
+  }
+  .hamburger span {
+    position: absolute;
+    left: 0; width: 100%; height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.35s ease, opacity 0.25s ease;
+  }
+  .hamburger span:nth-child(1) { top: 2px; }
+  .hamburger span:nth-child(2) { top: 9px; }
+  .hamburger span:nth-child(3) { top: 16px; }
+  .nav-open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-open .hamburger span:nth-child(2) { opacity: 0; }
+  .nav-open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    position: fixed;
+    inset: 60px 0 0 0;
+    background: var(--bg);
+    z-index: 55;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1), opacity 0.3s ease;
+  }
+  .nav-open .mobile-menu { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .mobile-menu a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 32px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(26,24,19,0.08);
+  }
+
+  /* ── PAGE ────────────────────────────────────── */
+  .main {
+    margin-left: var(--col-width);
+    min-height: 100vh;
+    padding: 36px;
+  }
+
+  .work-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .work-list > li > a,
+  .accordion-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.25s ease;
+  }
+
+  .work-list > li > a:hover,
+  .accordion-header:hover {
+    color: var(--accent);
+  }
+
+  .accordion-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+
+  .accordion.open .accordion-body {
+    max-height: 300px;
+  }
+
+  .sub-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px 0 8px 2.5em;
+  }
+
+  .sub-list a {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+    display: inline-block;
+    transition: color 0.25s ease;
+  }
+
+  .sub-list a:hover {
+    color: var(--accent);
+  }
+
+  /* ── MOBILE ──────────────────────────────────── */
+  @media (max-width: 820px) {
+    .nav-desktop { display: none; }
+    .nav-mobile  { display: block; }
+    .main { margin-left: 0; padding: 80px 20px 48px; }
+    .work-list > li > a,
+    .accordion-header { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- DESKTOP NAV -->
+<nav class="nav-desktop">
+  <a class="brand" href="index.html">Lucy Weaver</a>
+  <div class="nav-list">
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="mailto:lucy.weaver012@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile" id="mobileNav">
+  <div class="mobile-bar">
+    <a class="brand" href="index.html">Lucy Weaver</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu">
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="mailto:lucy.weaver012@gmail.com">Contact</a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+  <ul class="work-list">
+    <li class="accordion">
+      <button class="accordion-header">Wringing Blood from a Stone (solo show)</button>
+      <div class="accordion-body">
+        <ul class="sub-list">
+          <li><a href="WringingBloodfromaStone.html">Intro</a></li>
+          <li><a href="WringingBloodfromaStone.html#doubt">Doubt</a></li>
+          <li><a href="WringingBloodfromaStone.html#monad-device">Monad Device v.1</a></li>
+          <li><a href="WringingBloodfromaStone.html#network-triptych">Network Triptych</a></li>
+          <li><a href="WringingBloodfromaStone.html#i-dont-press-search">"I don't press search..."</a></li>
+          <li><a href="other_assets/Wring Blood from a Stone booklet_fix.pdf" target="_blank" rel="noopener">Booklet</a></li>
+          <li><a href="other_assets/Wringing Blood From A Stone_ Interview w_ Lewis Thelen.pdf" target="_blank" rel="noopener">Dialogue with Lewis Thelen</a></li>
+        </ul>
+      </div>
+    </li>
+    <li><a href="#">Pink Things</a></li>
+    <li><a href="#">Gelatin Compute</a></li>
+    <li><a href="StealthPhrenology.html">Stealth Phrenology</a></li>
+    <li><a href="SocratesOrganism.html">Socrates Organism</a></li>
+  </ul>
+</main>
+
+<script>
+  const navEl = document.getElementById('mobileNav');
+  document.getElementById('hamburger').addEventListener('click', () =>
+    navEl.classList.toggle('nav-open')
+  );
+
+  document.querySelectorAll('.accordion-header').forEach(btn => {
+    btn.addEventListener('click', () =>
+      btn.closest('.accordion').classList.toggle('open')
+    );
+  });
+</script>
+</body>
+</html>
