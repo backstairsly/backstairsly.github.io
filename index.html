@@ -236,11 +236,14 @@
     { title: 'Socrates Organism',  meta: '2025', url: 'SocratesOrganism.html',                          img: 'images/Socrates_Organism02.jpg'       },
     { title: 'Stealth Phrenology', meta: '2025', url: 'StealthPhrenology.html',                          img: 'images/Stealth_Phrenology01.jpg'      },
     { title: 'Monad Device',       meta: '2025', url: 'WringingBloodfromaStone.html#monad-device',      img: 'images/Monad_Device.gif'              },
+    { title: 'Pink Things',        meta: '2026', url: 'PinkThings.html',                                img: 'images/pinkthing.jpg'                 },
+    { title: 'Network Triptych',   meta: '2025', url: 'WringingBloodfromaStone.html#network-triptych',  img: 'images/Network_Triptych02_Detail-2.jpg' },
+    { title: "I don't press search...", meta: '2025', url: 'WringingBloodfromaStone.html#i-dont-press-search', img: 'images/I_dont_press_search02_detail-2.jpg' },
   ];
 
   /* ── Layout position pool ───────────────────────────────────────────────────
    * A varied set of horizontal positions to draw from. Each pass through the
-   * images picks 6 at random, so size and placement differ every cycle.
+   * images picks one per image at random, so size and placement differ every cycle.
    */
   const layouts = [
     { left: '4%',  width: '48%' }, { left: '52%', width: '40%' },
@@ -253,7 +256,7 @@
     { left: '58%', width: '34%' },
   ];
 
-  const PASSES         = 6;    // shuffled cycles → 36 items before any repeat
+  const PASSES         = 6;    // shuffled cycles → 54 items before any repeat
   const STEP           = 0.70; // step when overlapping: image starts 30% into the previous one
   const BREATHE_CHANCE = 0.2; // probability (0–1) an image gets space instead of overlap
   const BREATHE_STEP   = 1; // step when breathing: image starts 20% below the previous bottom
